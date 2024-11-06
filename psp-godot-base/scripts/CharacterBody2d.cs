@@ -12,6 +12,8 @@ public partial class CharacterBody2d : CharacterBody2D
 	
 	private PackedScene bala;
 	
+	bool CanTwoJump = true;
+	
 	public override void _Ready(){
 		animation = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		bala = GD.Load<PackedScene>("res://scenes/bala.tscn");
@@ -23,9 +25,18 @@ public partial class CharacterBody2d : CharacterBody2D
 
 		// Add the gravity.
 		if (!IsOnFloor())
-		{
+		{	
 			velocity += GetGravity() * (float)delta;
 			animation.Play("jump");
+			
+			if (Input.IsActionJustPressed("ui_up") && !IsOnFloor())
+			{
+				if(CanTwoJump == true){
+					velocity.Y = JumpVelocity;
+					CanTwoJump = false;
+				}
+			}
+			
 		}
 
 		// Handle Jump.
@@ -43,6 +54,7 @@ public partial class CharacterBody2d : CharacterBody2D
 			velocity.X = direction.X * Speed;
 			animation.FlipH = velocity.X < 0;
 			if (IsOnFloor()){
+				CanTwoJump = true;
 				animation.Play("walk");
 			}
 		}
@@ -50,6 +62,7 @@ public partial class CharacterBody2d : CharacterBody2D
 		{
 			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
 			if (IsOnFloor()){
+				CanTwoJump = true;
 				animation.Play("idle");
 			}
 		}
