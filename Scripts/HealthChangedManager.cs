@@ -4,7 +4,11 @@ using System;
 public partial class HealthChangedManager : Control
 {
     [Export]
+<<<<<<< HEAD
     public PackedScene HealthChangedLabelScene;
+=======
+    public PackedScene HealthChangedLabelScene = (PackedScene)ResourceLoader.Load("res://Scenes/health_changed_label.tscn");
+>>>>>>> 8016359 (El label esta vacio)
 
     private Label healthLabel;
 
