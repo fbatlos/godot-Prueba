@@ -534,4 +534,8 @@ position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
-[node name="HealthChangedManager" parent="." instance=ExtResource("6_7nj8j")]
+[node name="HealthChangedManager2" parent="." instance=ExtResource("6_7nj8j")]
+offset_left = 17.0
+offset_top = 31.0
+offset_right = 57.0
+offset_bottom = 71.0

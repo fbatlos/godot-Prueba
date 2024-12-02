@@ -3,23 +3,65 @@ using System;
 
 public partial class HealthChangedManager : Control
 {
-	[Export]
-	public PackedScene HealthChangedLabelScene;
+    [Export]
+    public PackedScene HealthChangedLabelScene;
 
-	private Label healthLabel;
+    private Label healthLabel;
 
-	public override void _Ready()
-	{
+    public override void _Ready()
+    {
+        GD.Print("HealthChangedManager _Ready() called.");
 
-		var labelInstance = (Control)HealthChangedLabelScene.Instantiate();
-		AddChild(labelInstance);
+        if (HealthChangedLabelScene == null)
+        {
+            GD.Print("Error: HealthChangedLabelScene no está asignado.");
+            return;
+        }
 
-		// Obtener el Label de la escena instanciada
-		healthLabel = labelInstance.GetNode<Label>("HitLabel");
-	}
+        var labelInstance = (Control)HealthChangedLabelScene.Instantiate();
+        AddChild(labelInstance);
+        GD.Print("HealthChangedLabelScene instancia añadida como hijo.");
 
-	private void OnHealthChanged(int newHealth)
-	{
-		healthLabel.Text = newHealth.ToString();
-	}
+        // Obtener el Label directamente si está en el nodo raíz
+        healthLabel = labelInstance.GetNode<Label>("HitLabel");
+        
+        if (healthLabel == null)
+        {
+            // Si no encuentra el Label directamente, intenta obtenerlo desde el nodo Control
+            GD.Print("No se encontró HitLabel directamente, buscando dentro del nodo Control.");
+            var controlNode = labelInstance.GetNode<Control>("Control");
+            if (controlNode == null)
+            {
+                GD.Print("Error: El nodo Control no fue encontrado.");
+                return;
+            }
+            else
+            {
+                GD.Print("Nodo Control encontrado.");
+                healthLabel = controlNode.GetNode<Label>("HitLabel");
+            }
+        }
+
+        // Comprobar si healthLabel es null
+        if (healthLabel == null)
+        {
+            GD.Print("Error: HitLabel no encontrado.");
+        }
+        else
+        {
+            GD.Print("HitLabel encontrado.");
+            healthLabel.Text = "Label inicializado";
+        }
+    }
+
+    public void OnHealthChanged(int newHealth)
+    {
+        GD.Print("OnHealthChanged called with newHealth: ", newHealth);
+        if (healthLabel != null)
+        {
+            healthLabel.Text = newHealth.ToString();
+        }
+    }
 }
+
+
