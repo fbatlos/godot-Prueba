@@ -3,32 +3,46 @@ using System;
 
 public partial class Damageable : Node
 {
-	[Export]
-	public int health { get; set; } = 40;
+    [Export(PropertyHint.Range, "0,100,1")] // Agregamos un rango para la salud
+    public int MaxHealth { get; set; } = 40;
 
-	private float _health;
+    private int _currentHealth;
 
-	public override void _Ready() {
-		SignalBus.Instance.Connect("OnHealthChanged", this, nameof(OnSignalHealthChanged)); 
-	}
+    public int CurrentHealth
+    {
+        get => _currentHealth;
+        private set
+        {
+            _currentHealth = Mathf.Clamp(value, 0, MaxHealth); // Clampea el valor para evitar números inválidos
+            if (_currentHealth <= 0)
+            {
+                OnDeath();
+            }
+        }
+    }
 
-	public float Health
-	{
-	
-		get => _health;
-		set
-		{
-			SignalBus.EmitSignal("OnHealthChangedEventHandler", GetParent(), value - _health);
-			_health = value;
-		}
-	}
+    public override void _Ready()
+    {
+        // Inicializamos la salud actual
+        CurrentHealth = MaxHealth;
+    }
 
-	public void Hit(int damage)
-	{
-		_health -= damage;
-		if (_health <= 0)
-		{
-			GetParent().QueueFree();
-		}
-	}
+    public void Hit(int damage)
+    {
+        if (damage < 0)
+        {
+            GD.PrintErr("Damage cannot be negative.");
+            return;
+        }
+
+        CurrentHealth -= damage;
+        GD.Print($"Health: {CurrentHealth}");
+    }
+
+    private void OnDeath()
+    {
+        GD.Print("Damageable has been destroyed.");
+        GetParent().QueueFree(); // Eliminamos el nodo
+    }
 }
+

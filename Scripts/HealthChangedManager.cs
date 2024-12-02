@@ -4,24 +4,22 @@ using System;
 public partial class HealthChangedManager : Control
 {
 	[Export]
-	public PackedScene HealthChangedLabel;
+	public PackedScene HealthChangedLabelScene;
 
-	// Called when the node enters the scene tree for the first time.
+	private Label healthLabel;
+
 	public override void _Ready()
 	{
-		HealthChangedLabel = (PackedScene)GD.Load("res://Scenes/health_changed_label.tscn");
-		SignalBus.Instance.Connect("OnHealthChanged", this, nameof(On_signal_health_changed));
+
+		var labelInstance = (Control)HealthChangedLabelScene.Instantiate();
+		AddChild(labelInstance);
+
+		// Obtener el Label de la escena instanciada
+		healthLabel = labelInstance.GetNode<Label>("HitLabel");
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	private void OnHealthChanged(int newHealth)
 	{
-	}
-
-	public void On_signal_health_changed(Node node, int amount_changed)
-	{
-		Label labelInstance = (Label)HealthChangedLabel.Instance(); 
-		node.AddChild(labelInstance); 
-		labelInstance.Text = amountChanged.ToString();
+		healthLabel.Text = newHealth.ToString();
 	}
 }

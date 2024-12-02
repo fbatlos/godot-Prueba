@@ -112,4 +112,3 @@ libraries = {
 
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource("2_j57gy")
-health = 45
