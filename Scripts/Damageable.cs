@@ -3,8 +3,16 @@ using System;
 
 public partial class Damageable : Node
 {
-	[Export(PropertyHint.Range, "0,100,1")] // Agregamos un rango para la salud
+	[Export(PropertyHint.Range, "0,100,1")]
 	public int MaxHealth { get; set; } = 40;
+
+	[Export]
+	public string hit_animation = "hit";
+
+	[Export]
+	public string dead_animation = "dead";
+
+	public CharacterStateMachine _characterStateMachine; 
 
 	private int _currentHealth;
 
@@ -15,7 +23,7 @@ public partial class Damageable : Node
 		get => _currentHealth;
 		private set
 		{
-			_currentHealth = Mathf.Clamp(value, 0, MaxHealth); // Clampea el valor para evitar números inválidos
+			_currentHealth = Mathf.Clamp(value, 0, MaxHealth);
 			if (_currentHealth <= 0)
 			{
 				OnDeath();
@@ -25,12 +33,16 @@ public partial class Damageable : Node
 
 	public override void _Ready()
 	{
-		// Inicializamos la salud actual
 		CurrentHealth = MaxHealth;
 		_HealthChangedManager = GetNode<HealthChangedManager>("../HealthChangedManager");
-		if(_HealthChangedManager == null){
+
+		if (_HealthChangedManager == null)
+		{
 			GD.Print("No se pudo encontrar el nodo HealthChangedManager.");
 		}
+
+		_characterStateMachine = GetNode<CharacterStateMachine>("../CharacterStateMachine");
+
 	}
 
 	public void Hit(int damage)
@@ -41,13 +53,15 @@ public partial class Damageable : Node
 			return;
 		}
 
+		_characterStateMachine.ChangeAnimationState(hit_animation);
 		CurrentHealth -= damage;
-		_HealthChangedManager.OnHealthChanged(-damage);
+		_HealthChangedManager?.OnHealthChanged(-damage);
 	}
 
 	private void OnDeath()
 	{
 		GD.Print("Fue eliminado.");
-		GetParent().QueueFree(); // Eliminamos el nodo
+		_characterStateMachine.ChangeAnimationState(dead_animation);
+		//GetParent().QueueFree();
 	}
 }
