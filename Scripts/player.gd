@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var animation_tree : AnimationTree = $AnimationTree
 @onready var state_machine : CharacterStateMachine = $CharacterStateMachine
+@onready var sword : Area2D = $Sword
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -12,6 +13,7 @@ var direction : Vector2 = Vector2.ZERO
 
 func _ready():
 	animation_tree.active = true
+	sword.monitoring = false
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -40,3 +42,5 @@ func update_facing_direction():
 		sprite.flip_h = false
 	elif direction.x < 0:
 		sprite.flip_h = true
+	if (sprite.flip_h):
+		sword.position.x*=-1

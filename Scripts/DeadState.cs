@@ -8,4 +8,5 @@ public partial class DeadState : Node
 		var animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		animationPlayer.Play("dead");
 	}
+	
 }

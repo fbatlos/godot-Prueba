@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class Damageable : Node
 {
@@ -11,12 +12,18 @@ public partial class Damageable : Node
 
 	[Export]
 	public string dead_animation = "dead";
+	
+	public CharacterStateMachine _characterStateMachine;
 
-	public CharacterStateMachine _characterStateMachine; 
+	public Timer timer; 
 
 	private int _currentHealth;
 
 	private HealthChangedManager _HealthChangedManager;
+
+	private bool dead = false;
+
+	private double timerDeath = 0.0;
 
 	public int CurrentHealth
 	{
@@ -26,7 +33,7 @@ public partial class Damageable : Node
 			_currentHealth = Mathf.Clamp(value, 0, MaxHealth);
 			if (_currentHealth <= 0)
 			{
-				OnDeath();
+				dead =true;
 			}
 		}
 	}
@@ -43,6 +50,14 @@ public partial class Damageable : Node
 
 		_characterStateMachine = GetNode<CharacterStateMachine>("../CharacterStateMachine");
 
+		timer = GetNode<Timer>("../Timer");
+	}
+
+	public override void _Process(double delta)
+	{
+		if(dead){
+			OnDeath(delta);
+		}
 	}
 
 	public void Hit(int damage)
@@ -58,10 +73,13 @@ public partial class Damageable : Node
 		_HealthChangedManager?.OnHealthChanged(-damage);
 	}
 
-	private void OnDeath()
+	private void OnDeath(double delta)
 	{
-		GD.Print("Fue eliminado.");
 		_characterStateMachine.ChangeAnimationState(dead_animation);
-		//GetParent().QueueFree();
+		timerDeath -= delta;
+		if(timerDeath <= 0){
+			GetParent().QueueFree();
+		}
+		dead = false;
 	}
 }

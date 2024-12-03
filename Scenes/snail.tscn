@@ -49,8 +49,8 @@ tracks/2/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_k8mpg"]
-resource_name = "walk"
+[sub_resource type="Animation" id="Animation_euhtw"]
+resource_name = "dead"
 length = 0.8
 loop_mode = 1
 step = 0.1
@@ -64,7 +64,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_4pq6f")]
+"values": [ExtResource("2_siq2g")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -91,8 +91,8 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
-[sub_resource type="Animation" id="Animation_euhtw"]
-resource_name = "dead"
+[sub_resource type="Animation" id="Animation_k8mpg"]
+resource_name = "walk"
 length = 0.8
 loop_mode = 1
 step = 0.1
@@ -106,7 +106,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_siq2g")]
+"values": [ExtResource("1_4pq6f")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -236,4 +236,4 @@ AnimationPlayerPath = NodePath("../AnimationPlayer")
 [node name="dead" type="Node" parent="."]
 script = ExtResource("7_e0luu")
 
-[connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine" method="_on_animation_tree_animation_finished"]
+[connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine" method="OnAnimationFinished"]

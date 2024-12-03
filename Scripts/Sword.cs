@@ -12,8 +12,8 @@ public partial class Sword : Area2D
 	{
 		Monitoring = false;
 	}
-
 	
+
 	public void _on_body_entered(Node body)
 	{
 		foreach (Node child in body.GetChildren()) { 
@@ -27,3 +27,5 @@ public partial class Sword : Area2D
 	
 }
 
+/* hearbar , menu ,daño , endgame y items
+*/

@@ -28,14 +28,14 @@ public partial class HealthChangedManager : Control
 		if (healthLabel != null)
 		{
 			healthLabel.Text = newHealth.ToString();
-            
-            if (newHealth >= 0){
-                healthLabel.Modulate = heal_color;
-            }
-            else
-            {
-                healthLabel.Modulate = damage_color;
-            }
+			
+			if (newHealth >= 0){
+				healthLabel.Modulate = heal_color;
+			}
+			else
+			{
+				healthLabel.Modulate = damage_color;
+			}
 
 		}else{
 			GD.Print("Error: HitLabel no encontrado.");
