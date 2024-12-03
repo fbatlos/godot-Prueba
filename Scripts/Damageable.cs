@@ -27,25 +27,27 @@ public partial class Damageable : Node
 	{
 		// Inicializamos la salud actual
 		CurrentHealth = MaxHealth;
-		_HealthChangedManager = GetNode<HealthChangedManager>("res://Scripts/HealthChangedManager.cs");
+		_HealthChangedManager = GetNode<HealthChangedManager>("../HealthChangedManager");
+		if(_HealthChangedManager == null){
+			GD.Print("No se pudo encontrar el nodo HealthChangedManager.");
+		}
 	}
 
 	public void Hit(int damage)
 	{
 		if (damage < 0)
 		{
-			GD.PrintErr("Damage cannot be negative.");
+			GD.PrintErr("No puede ser negativo.");
 			return;
 		}
 
 		CurrentHealth -= damage;
-		_HealthChangedManager.OnHealthChanged(damage);
-		GD.Print($"Health: {CurrentHealth}");
+		_HealthChangedManager.OnHealthChanged(-damage);
 	}
 
 	private void OnDeath()
 	{
-		GD.Print("Damageable has been destroyed.");
+		GD.Print("Fue eliminado.");
 		GetParent().QueueFree(); // Eliminamos el nodo
 	}
 }

@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmmkegp00cl18"]
+[gd_scene load_steps=8 format=3 uid="uid://dmmkegp00cl18"]
 
 [ext_resource type="Texture2D" uid="uid://bxpx8tjblgveb" path="res://Art/Legacy-Fantasy - High Forest 2.3/Assets/Tiles.png" id="1_eqpw1"]
 [ext_resource type="Texture2D" uid="uid://djjk8rhfsao1a" path="res://Art/Legacy-Fantasy - High Forest 2.3/Background/Background.png" id="1_uo41u"]
 [ext_resource type="PackedScene" uid="uid://dtu75durqwd02" path="res://Scenes/player.tscn" id="3_x2x7r"]
 [ext_resource type="PackedScene" uid="uid://ddm52nl7un43n" path="res://Scenes/kill_zone.tscn" id="4_00amc"]
 [ext_resource type="PackedScene" uid="uid://4tetsylb8tah" path="res://Scenes/snail.tscn" id="5_hth6s"]
-[ext_resource type="PackedScene" uid="uid://3rq8865pnt3" path="res://Scenes/health_changed_manager.tscn" id="6_7nj8j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x01cw"]
 texture = ExtResource("1_eqpw1")
@@ -533,9 +532,3 @@ process_callback = 0
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
-
-[node name="HealthChangedManager2" parent="." instance=ExtResource("6_7nj8j")]
-offset_left = 17.0
-offset_top = 31.0
-offset_right = 57.0
-offset_bottom = 71.0
