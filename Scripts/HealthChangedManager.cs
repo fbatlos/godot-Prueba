@@ -55,6 +55,7 @@ public partial class HealthChangedManager : Control
         {
             GD.Print("HitLabel encontrado.");
             healthLabel.Text = "Label inicializado";
+            
         }
     }
 
