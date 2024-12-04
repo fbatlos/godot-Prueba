@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://4tetsylb8tah"]
+[gd_scene load_steps=22 format=3 uid="uid://4tetsylb8tah"]
 
 [ext_resource type="Texture2D" uid="uid://l5x15wmsj144" path="res://Art/Legacy-Fantasy - High Forest 2.3/Mob/Snail/walk-Sheet.png" id="1_4pq6f"]
 [ext_resource type="Script" path="res://Scripts/Snail.cs" id="1_yiknx"]
@@ -7,9 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://3rq8865pnt3" path="res://Scenes/health_changed_manager.tscn" id="3_yghxl"]
 [ext_resource type="Script" path="res://Scripts/CharacterStateMachine.cs" id="5_2ymxr"]
 [ext_resource type="Script" path="res://Scripts/DeadState.cs" id="7_e0luu"]
+[ext_resource type="Script" path="res://Scripts/VisionEnemy.cs" id="8_ybiuh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_81h6v"]
 size = Vector2(30, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eesmc"]
+size = Vector2(329, 94.25)
 
 [sub_resource type="Animation" id="Animation_f0n2k"]
 length = 0.001
@@ -203,6 +207,13 @@ script = ExtResource("1_yiknx")
 position = Vector2(18, -9)
 shape = SubResource("RectangleShape2D_81h6v")
 
+[node name="VisionEnemy" type="Area2D" parent="."]
+script = ExtResource("8_ybiuh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionEnemy"]
+position = Vector2(18, -43.875)
+shape = SubResource("RectangleShape2D_eesmc")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(17, -14)
@@ -239,4 +250,5 @@ AnimationPlayerPath = NodePath("../AnimationPlayer")
 [node name="dead" type="Node" parent="."]
 script = ExtResource("7_e0luu")
 
+[connection signal="body_entered" from="VisionEnemy" to="VisionEnemy" method="playerIsInside"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine" method="OnAnimationFinished"]

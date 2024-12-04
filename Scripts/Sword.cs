@@ -28,5 +28,5 @@ public partial class Sword : Area2D
 	
 }
 
-/* hearbar , menu ,daño , endgame y items
+/* hearbar , menu ,daño , endgame y items, marker look
 */

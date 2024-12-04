@@ -3,10 +3,11 @@ using System;
 
 public partial class Snail : CharacterBody2D
 {
-	public const float Speed = 300.0f;
+	public const float Speed = 50.0f;
 	
-	[Export]
-	Vector2 starting_move = new Vector2(-1,0);
+	
+	public Vector2 starting_move = new VisionEnemy().playerEntred;
+
 
 	public override void _PhysicsProcess(double delta)
 	{
@@ -20,7 +21,9 @@ public partial class Snail : CharacterBody2D
 
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
-		Vector2 direction = starting_move;
+		Vector2 enemyPosition = GlobalPosition;
+		GD.Print(starting_move);
+		Vector2 direction = new Vector2(starting_move.X,0).Normalized();
 		if (direction != Vector2.Zero)
 		{
 			velocity.X = direction.X * Speed;
