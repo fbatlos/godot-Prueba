@@ -7,6 +7,7 @@ public partial class Sword : Area2D
 {
 
 	[Export] public int damage = 10;
+	
 
 	public override void _Ready()
 	{

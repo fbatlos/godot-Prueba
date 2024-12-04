@@ -15,16 +15,16 @@ public partial class HealthChangedManager : Control
 
 
 	public override void _Ready() {
-		Node labelInstance = HealthChangedLabelScene.Instantiate();
-		AddChild(labelInstance);
-		
-		healthLabel = labelInstance.GetNode<Label>("HitLabel"); 
-		
-		if (healthLabel == null) { GD.Print("Label 'HitLabel' encontrado correctamente."); } 
 	}
 
 	public void OnHealthChanged(int newHealth)
 	{
+		Node labelInstance = HealthChangedLabelScene.Instantiate();
+		AddChild(labelInstance);
+		
+		healthLabel = labelInstance.GetNode<Label>("HitLabel");
+		healthLabel.Position = new Vector2(0,0);
+		
 		if (healthLabel != null)
 		{
 			healthLabel.Text = newHealth.ToString();

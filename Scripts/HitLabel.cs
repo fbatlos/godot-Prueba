@@ -1,27 +1,22 @@
 using Godot;
 using System;
 
-public partial class KillZone : Area2D
+public partial class HitLabel : Label
 {
+	[Export]
+	float speed = 10.5f;
+	
+	Vector2 posicionSpawn = new Vector2(0,1);
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		GD.Print(Position);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-	}
-	
-	public void _OnBodyEnter(Node2D body){
-		GD.Print(body.Name);
-		if (body.Name == "Player"){
-			GD.Print("Kill Zone!");
-			GetTree().ReloadCurrentScene();
-		}
-		else
-		{
-			body.QueueFree();
-		}
+		Position += posicionSpawn * (float)delta * speed;
+		
 	}
 }

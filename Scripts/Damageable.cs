@@ -15,7 +15,6 @@ public partial class Damageable : Node
 	
 	public CharacterStateMachine _characterStateMachine;
 
-	public Timer timer; 
 
 	private int _currentHealth;
 
@@ -23,7 +22,7 @@ public partial class Damageable : Node
 
 	private bool dead = false;
 
-	private double timerDeath = 0.0;
+	private double timerDeath = 0.8;
 
 	public int CurrentHealth
 	{
@@ -49,8 +48,6 @@ public partial class Damageable : Node
 		}
 
 		_characterStateMachine = GetNode<CharacterStateMachine>("../CharacterStateMachine");
-
-		timer = GetNode<Timer>("../Timer");
 	}
 
 	public override void _Process(double delta)
@@ -62,11 +59,6 @@ public partial class Damageable : Node
 
 	public void Hit(int damage)
 	{
-		if (damage < 0)
-		{
-			GD.PrintErr("No puede ser negativo.");
-			return;
-		}
 
 		_characterStateMachine.ChangeAnimationState(hit_animation);
 		CurrentHealth -= damage;
@@ -79,7 +71,7 @@ public partial class Damageable : Node
 		timerDeath -= delta;
 		if(timerDeath <= 0){
 			GetParent().QueueFree();
+			dead = false;
 		}
-		dead = false;
 	}
 }

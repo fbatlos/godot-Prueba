@@ -500,10 +500,10 @@ sources/0 = SubResource("TileSetAtlasSource_x01cw")
 [node name="TestLevel" type="Node2D"]
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = -2770.0
-offset_top = -183.0
-offset_right = 3391.0
-offset_bottom = 552.0
+offset_left = -2769.0
+offset_top = -175.0
+offset_right = 3392.0
+offset_bottom = 560.0
 texture = ExtResource("1_uo41u")
 stretch_mode = 1
 
@@ -518,7 +518,7 @@ position = Vector2(-38, 304)
 collision_mask = 1
 
 [node name="Snail" parent="." instance=ExtResource("5_hth6s")]
-position = Vector2(19, 88)
+position = Vector2(24, 33)
 
 [node name="Player" parent="." instance=ExtResource("3_x2x7r")]
 position = Vector2(-82, 43)

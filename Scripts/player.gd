@@ -40,7 +40,7 @@ func update_animation_parameters():
 func update_facing_direction():
 	if direction.x > 0:
 		sprite.flip_h = false
+		sword.position.x = 0 
 	elif direction.x < 0:
 		sprite.flip_h = true
-	if (sprite.flip_h):
-		sword.position.x*=-1
+		sword.position.x =-52.4
