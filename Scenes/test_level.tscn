@@ -518,7 +518,7 @@ position = Vector2(-38, 304)
 collision_mask = 1
 
 [node name="Snail" parent="." instance=ExtResource("5_hth6s")]
-position = Vector2(24, 33)
+position = Vector2(28, 88)
 
 [node name="Player" parent="." instance=ExtResource("3_x2x7r")]
 position = Vector2(-82, 43)

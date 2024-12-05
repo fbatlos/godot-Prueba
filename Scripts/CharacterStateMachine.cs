@@ -24,6 +24,7 @@ public partial class CharacterStateMachine : Node
 
 	public void ChangeAnimationState(string animationState)
 	{
+		GD.Print($"Animación {animationState}");
 		if (stateMachinePlayback != null)
 		{
 			stateMachinePlayback.Travel(animationState);
