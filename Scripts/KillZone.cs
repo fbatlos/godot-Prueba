@@ -3,6 +3,7 @@ using System;
 
 public partial class KillZone : Area2D
 {
+	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -16,8 +17,7 @@ public partial class KillZone : Area2D
 	public void _OnBodyEnter(Node2D body){
 		GD.Print(body.Name);
 		if (body.Name == "Player"){
-			GD.Print("Kill Zone!");
-			GetTree().ReloadCurrentScene();
+			GetTree().ChangeSceneToFile("res://Scenes/game_over.tscn");
 		}
 		else
 		{
