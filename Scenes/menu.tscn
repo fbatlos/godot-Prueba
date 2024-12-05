@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://kw5atrl05fra"]
 
-[ext_resource type="Script" path="res://Scenes/Menu.cs" id="1_ny3pm"]
+[ext_resource type="Script" path="res://Scripts/Menu.cs" id="1_qw4rn"]
 [ext_resource type="Texture2D" uid="uid://coooo2e35cu67" path="res://Art/fondoMenu.png" id="2_23iqs"]
 
 [node name="Menu" type="Control"]
@@ -15,7 +15,7 @@ offset_bottom = 11.575
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.35, 0.35)
-script = ExtResource("1_ny3pm")
+script = ExtResource("1_qw4rn")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
