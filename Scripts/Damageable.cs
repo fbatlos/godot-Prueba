@@ -15,12 +15,15 @@ public partial class Damageable : Node
 	
 	public CharacterStateMachine _characterStateMachine;
 
+	private Snail snail;
 
 	private int _currentHealth;
 
 	private HealthChangedManager _HealthChangedManager;
 
-	private bool dead = false;
+	public bool dead = false;
+
+	public bool hit = false ;
 
 	private double timerDeath = 0.8;
 
@@ -48,6 +51,7 @@ public partial class Damageable : Node
 		}
 
 		_characterStateMachine = GetNode<CharacterStateMachine>("../CharacterStateMachine");
+		snail = GetNode<Snail>(".");
 	}
 
 	public override void _Process(double delta)
@@ -59,10 +63,12 @@ public partial class Damageable : Node
 
 	public void Hit(int damage)
 	{
-
+		hit = true;
 		_characterStateMachine.ChangeAnimationState(hit_animation);
 		CurrentHealth -= damage;
 		_HealthChangedManager?.OnHealthChanged(-damage);
+		
+		
 	}
 
 	private void OnDeath(double delta)

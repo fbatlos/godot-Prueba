@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://4tetsylb8tah"]
+[gd_scene load_steps=36 format=3 uid="uid://4tetsylb8tah"]
 
 [ext_resource type="Texture2D" uid="uid://l5x15wmsj144" path="res://Art/Legacy-Fantasy - High Forest 2.3/Mob/Snail/walk-Sheet.png" id="1_4pq6f"]
 [ext_resource type="Script" path="res://Scripts/Snail.cs" id="1_yiknx"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://3rq8865pnt3" path="res://Scenes/health_changed_manager.tscn" id="3_yghxl"]
 [ext_resource type="Script" path="res://Scripts/CharacterStateMachine.cs" id="5_2ymxr"]
 [ext_resource type="Texture2D" uid="uid://df4u83nvchwx1" path="res://Art/Legacy-Fantasy - High Forest 2.3/Mob/Snail/Hide-Sheet.png" id="5_3uiyc"]
+[ext_resource type="Texture2D" uid="uid://bei002jyx6u00" path="res://Art/Legacy-Fantasy - High Forest 2.3/Mob/Snail/all.png" id="6_qm018"]
 [ext_resource type="Script" path="res://Scripts/DeadState.cs" id="7_e0luu"]
 [ext_resource type="Script" path="res://Scripts/VisionEnemy.cs" id="8_ybiuh"]
 
@@ -14,7 +15,7 @@
 size = Vector2(30, 22)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eesmc"]
-size = Vector2(329, 94.25)
+size = Vector2(300, 156.25)
 
 [sub_resource type="Animation" id="Animation_f0n2k"]
 length = 0.001
@@ -53,6 +54,47 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_coohb"]
+resource_name = "continue_walk"
+length = 0.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_3uiyc")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 6, 5, 4, 3, 2, 1, 0]
 }
 
 [sub_resource type="Animation" id="Animation_euhtw"]
@@ -180,9 +222,9 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
-[sub_resource type="Animation" id="Animation_coohb"]
-resource_name = "continue_walk"
-length = 0.8
+[sub_resource type="Animation" id="Animation_tdtnc"]
+resource_name = "hit"
+length = 0.2
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -194,7 +236,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("5_3uiyc")]
+"values": [ExtResource("6_qm018")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -206,7 +248,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [8]
+"values": [1]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -215,10 +257,10 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [7, 6, 5, 4, 3, 2, 1, 0]
+"values": [0, 0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gqudi"]
@@ -226,6 +268,7 @@ _data = {
 "RESET": SubResource("Animation_f0n2k"),
 "continue_walk": SubResource("Animation_coohb"),
 "dead": SubResource("Animation_euhtw"),
+"hit": SubResource("Animation_tdtnc"),
 "stop": SubResource("Animation_4hoql"),
 "walk": SubResource("Animation_k8mpg")
 }
@@ -236,16 +279,14 @@ animation = &"continue_walk"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qwa1t"]
 animation = &"dead"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yly85"]
+animation = &"hit"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qtoa3"]
 animation = &"stop"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8ytoh"]
 animation = &"walk"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xo06h"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8bxva"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6e4nx"]
 switch_mode = 1
@@ -256,17 +297,33 @@ switch_mode = 1
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ekqpv"]
 switch_mode = 1
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lcv66"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4ixx5"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4yju5"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_57qg1"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iac8m"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4x2x5"]
+states/Start/position = Vector2(171, 83)
 states/continue_walk/node = SubResource("AnimationNodeAnimation_83nch")
 states/continue_walk/position = Vector2(514, 222.049)
 states/dead/node = SubResource("AnimationNodeAnimation_qwa1t")
-states/dead/position = Vector2(609, 100)
+states/dead/position = Vector2(743, 100)
+states/hit/node = SubResource("AnimationNodeAnimation_yly85")
+states/hit/position = Vector2(557, 100)
 states/stop/node = SubResource("AnimationNodeAnimation_qtoa3")
 states/stop/position = Vector2(340, 219)
 states/walk/node = SubResource("AnimationNodeAnimation_8ytoh")
 states/walk/position = Vector2(394, 100)
-transitions = ["Start", "walk", SubResource("AnimationNodeStateMachineTransition_xo06h"), "walk", "dead", SubResource("AnimationNodeStateMachineTransition_8bxva"), "walk", "stop", SubResource("AnimationNodeStateMachineTransition_6e4nx"), "stop", "continue_walk", SubResource("AnimationNodeStateMachineTransition_eky23"), "continue_walk", "walk", SubResource("AnimationNodeStateMachineTransition_ekqpv")]
-graph_offset = Vector2(0, -81.5574)
+transitions = ["walk", "stop", SubResource("AnimationNodeStateMachineTransition_6e4nx"), "stop", "continue_walk", SubResource("AnimationNodeStateMachineTransition_eky23"), "continue_walk", "walk", SubResource("AnimationNodeStateMachineTransition_ekqpv"), "Start", "walk", SubResource("AnimationNodeStateMachineTransition_lcv66"), "walk", "hit", SubResource("AnimationNodeStateMachineTransition_4ixx5"), "hit", "walk", SubResource("AnimationNodeStateMachineTransition_4yju5"), "hit", "dead", SubResource("AnimationNodeStateMachineTransition_57qg1"), "dead", "End", SubResource("AnimationNodeStateMachineTransition_iac8m")]
+graph_offset = Vector2(0, 21.3647)
 
 [sub_resource type="CSharpScript" id="CSharpScript_66eeu"]
 script/source = "using Godot;
@@ -318,7 +375,7 @@ shape = SubResource("RectangleShape2D_81h6v")
 script = ExtResource("8_ybiuh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VisionEnemy"]
-position = Vector2(18, -43.875)
+position = Vector2(13, -74.875)
 shape = SubResource("RectangleShape2D_eesmc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -342,6 +399,7 @@ anim_player = NodePath("../AnimationPlayer")
 
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource("2_j57gy")
+MaxHealth = 100
 
 [node name="hit" type="Node" parent="."]
 script = SubResource("CSharpScript_66eeu")

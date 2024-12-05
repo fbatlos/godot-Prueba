@@ -6,7 +6,6 @@ public partial class Snail : CharacterBody2D
 	public const float Speed = 50.0f;
 	public const string name_Animation_Stop = "stop";
 	public  const string name_Animation_Walk = "walk";
-
 	public  const string name_Animation_Continue_Walk = "continue_walk";
 	private double timerWait = 0.8;
 
@@ -28,20 +27,28 @@ public partial class Snail : CharacterBody2D
 
 	private Vector2 direction;
 
+	public Damageable _isDead;
+
 	public override void _Ready()
 	{
-		_characterStateMachine = GetNode<CharacterStateMachine>("CharacterStateMachine");	
+		_characterStateMachine = GetNode<CharacterStateMachine>("CharacterStateMachine");
+		_isDead = GetNode<Damageable>("Damageable");
 	}
 
 	public override void _Process(double delta)
 	{
-		visionNodo = GetNode<VisionEnemy>(VisionPath); 
-		player = visionNodo.player;
-		continue_walk = visionNodo.continue_walk;
-		if(continue_walk){
-			OnContinue(delta);
+		if(_isDead.dead == false){
+
+			visionNodo = GetNode<VisionEnemy>(VisionPath); 
+			player = visionNodo.player;
+			continue_walk = visionNodo.continue_walk;
+
+			if(continue_walk){
+				//timerWait = 0.8;
+				OnContinue(delta);
+			}
+			starting_move = player.GlobalPosition;
 		}
-		starting_move = player.GlobalPosition;
 	}
 
 
@@ -55,21 +62,41 @@ public partial class Snail : CharacterBody2D
 			velocity += GetGravity() * (float)delta;
 		}
 
+		
+
 		//No se mueve 
-		if(player == null  || continue_walk == true){
+		if(player == null  || (continue_walk || _isDead.dead) ){
 			Vector2 enemyPosition = GlobalPosition;
 			direction = new Vector2(0,0).Normalized();
-			
-			
 		}else{
 			Vector2 enemyPosition = GlobalPosition;
 			direction = new Vector2(starting_move.X - enemyPosition.X,0).Normalized();
 		}
+
+		if(_isDead.hit){
+			
+			_characterStateMachine.ChangeAnimationState("hit");
+			if(sprite.FlipH){
+				velocity +=new Vector2(50,-60) ;
+				Position += new Vector2(30,0);
+				//GD.Print(velocity);
+			}
+			else
+			{
+				velocity +=new Vector2(50,-60);
+				Position += new Vector2(30,0);
+				//GD.Print(velocity);
+			}
+			_isDead.hit = false;
+		}
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
-		if (direction != Vector2.Zero)
+		else if (direction != Vector2.Zero && _isDead.hit == false)
 		{
+			//if(_isDead.dead){GD.Print(direction);}
+
 			velocity.X = direction.X * Speed;
+
 			if (direction.X < 0){
 				sprite.FlipH= false;
 			}
@@ -96,5 +123,6 @@ public partial class Snail : CharacterBody2D
 			continue_walk = false;
 			_characterStateMachine.ChangeAnimationState(name_Animation_Walk);
 		}
+
 	}
 }

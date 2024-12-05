@@ -17,6 +17,10 @@ public partial class HitLabel : Label
 	public override void _Process(double delta)
 	{
 		Position += posicionSpawn * (float)delta * speed;
+		GD.Print(Position);
 		
+		if(Position > new Vector2(0, 15)){
+			QueueFree();
+		}
 	}
 }
