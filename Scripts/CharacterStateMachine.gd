@@ -5,6 +5,9 @@ class_name CharacterStateMachine
 @export var character : CharacterBody2D
 @export var animation_tree : AnimationTree
 @export var current_state : State
+@export var damageable : Node
+
+@onready var state_machine = animation_tree.get("parameters/playback")
 
 var states : Array[State]
 
@@ -41,3 +44,7 @@ func switch_states(new_state : State):
 
 func _input(event : InputEvent):
 	current_state.state_input(event)
+	
+func ChangeAnimationState(state_name:String):
+	print("Hola esto en cambio")
+	state_machine.travel(state_name)

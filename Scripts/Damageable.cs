@@ -12,13 +12,15 @@ public partial class Damageable : Node
 
 	public const string hit_animation = "hit";
 	public const string dead_animation = "dead";
-	
-	public CharacterStateMachine _characterStateMachine;
+
+	[Export]
+	public CharacterStateMachine characterStateMachine;
 
 
 	private int _currentHealth;
 
-	private HealthChangedManager _HealthChangedManager;
+	[Export]
+	public HealthChangedManager _HealthChangedManager;
 
 	public bool dead = false;
 
@@ -42,14 +44,14 @@ public partial class Damageable : Node
 	public override void _Ready()
 	{
 		CurrentHealth = MaxHealth;
-		_HealthChangedManager = GetNode<HealthChangedManager>("../HealthChangedManager");
+		//_HealthChangedManager = GetNode<HealthChangedManager>("../HealthChangedManager");
 
 		if (_HealthChangedManager == null)
 		{
 			GD.Print("No se pudo encontrar el nodo HealthChangedManager.");
 		}
 
-		_characterStateMachine = GetNode<CharacterStateMachine>("../CharacterStateMachine");
+		//_characterStateMachine = GetNode<CharacterStateMachine>("../CharacterStateMachine");
 	}
 
 	public override void _Process(double delta)
@@ -63,8 +65,7 @@ public partial class Damageable : Node
 	public void Hit(int damage)
 	{
 		hit = true;
-		_characterStateMachine.ChangeAnimationState(hit_animation);
-		GD.Print("Me han atacado");
+		//characterStateMachine.ChangeAnimationState(hit_animation);
 		CurrentHealth -= damage;
 		_HealthChangedManager?.OnHealthChanged(-damage);
 		
@@ -73,11 +74,16 @@ public partial class Damageable : Node
 
 	private void OnDeath(double delta)
 	{
-		_characterStateMachine.ChangeAnimationState(dead_animation);
+		characterStateMachine.ChangeAnimationState(dead_animation);
 		timerDeath -= delta;
 		if(timerDeath <= 0){
-			GetParent().QueueFree();
-			dead = false;
+			if(GetParent().Name != "Player"){
+				GetParent().QueueFree();
+				dead = false;
+			}else{
+				GetTree().ChangeSceneToFile("res://Scenes/game_over.tscn");
+			}
+			
 		}
 	}
 }

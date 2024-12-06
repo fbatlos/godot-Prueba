@@ -417,9 +417,11 @@ offset_bottom = -11.0
 tree_root = SubResource("AnimationNodeStateMachine_4x2x5")
 anim_player = NodePath("../AnimationPlayer")
 
-[node name="Damageable" type="Node" parent="." node_paths=PackedStringArray("health_bar")]
+[node name="Damageable" type="Node" parent="." node_paths=PackedStringArray("health_bar", "characterStateMachine", "_HealthChangedManager")]
 script = ExtResource("11_s1pia")
 health_bar = NodePath("../ProgressBar")
+characterStateMachine = NodePath("../CharacterStateMachine")
+_HealthChangedManager = NodePath("../HealthChangedManager")
 
 [node name="hit" type="Node" parent="."]
 script = SubResource("CSharpScript_66eeu")
@@ -435,7 +437,7 @@ AnimationPlayerPath = NodePath("../AnimationPlayer")
 [node name="dead" type="Node" parent="."]
 script = ExtResource("7_e0luu")
 
-[connection signal="body_entered" from="Attack" to="Attack" method="playerIsInside"]
+[connection signal="body_entered" from="Attack" to="Attack" method="_on_body_entered"]
 [connection signal="body_entered" from="VisionEnemy" to="VisionEnemy" method="playerIsInside"]
 [connection signal="body_exited" from="VisionEnemy" to="VisionEnemy" method="playerIsOut"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine" method="OnAnimationFinished"]
