@@ -16,6 +16,9 @@ public partial class Snail : CharacterBody2D
 
 	[Export]
 	public Sprite2D sprite;
+	
+	[Export]
+	public Area2D attack;
 
 	public VisionEnemy visionNodo;
 
@@ -78,7 +81,7 @@ public partial class Snail : CharacterBody2D
 			_characterStateMachine.ChangeAnimationState("hit");
 			if(sprite.FlipH){
 				velocity +=new Vector2(50,-60) ;
-				Position += new Vector2(30,0);
+				Position += new Vector2(-30,0);
 				//GD.Print(velocity);
 			}
 			else
@@ -99,9 +102,11 @@ public partial class Snail : CharacterBody2D
 
 			if (direction.X < 0){
 				sprite.FlipH= false;
+				attack.Position = new Vector2(0f, attack.Position.Y);
 			}
 		 	else if (direction.X > 0){
 				sprite.FlipH = true;
+				attack.Position = new Vector2(9f, attack.Position.Y); 
 			}
 		}
 		else

@@ -8,14 +8,13 @@ public partial class Damageable : Node
 	public int MaxHealth { get; set; } = 40;
 
 	[Export]
-	public string hit_animation = "hit";
+	public health_bar health_bar;
 
-	[Export]
-	public string dead_animation = "dead";
+	public const string hit_animation = "hit";
+	public const string dead_animation = "dead";
 	
 	public CharacterStateMachine _characterStateMachine;
 
-	private Snail snail;
 
 	private int _currentHealth;
 
@@ -51,7 +50,6 @@ public partial class Damageable : Node
 		}
 
 		_characterStateMachine = GetNode<CharacterStateMachine>("../CharacterStateMachine");
-		snail = GetNode<Snail>(".");
 	}
 
 	public override void _Process(double delta)
@@ -59,12 +57,14 @@ public partial class Damageable : Node
 		if(dead){
 			OnDeath(delta);
 		}
+		health_bar.updateHealth(_currentHealth);
 	}
 
 	public void Hit(int damage)
 	{
 		hit = true;
 		_characterStateMachine.ChangeAnimationState(hit_animation);
+		GD.Print("Me han atacado");
 		CurrentHealth -= damage;
 		_HealthChangedManager?.OnHealthChanged(-damage);
 		

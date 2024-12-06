@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://dtu75durqwd02"]
+[gd_scene load_steps=46 format=3 uid="uid://dtu75durqwd02"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_flj5s"]
 [ext_resource type="Texture2D" uid="uid://d31g75e3ijbv4" path="res://Art/Legacy-Fantasy - High Forest 2.3/Character/Idle/Idle-Sheet.png" id="1_uohqy"]
@@ -10,7 +10,10 @@
 [ext_resource type="Script" path="res://Scripts/AirState.gd" id="9_sg48e"]
 [ext_resource type="Script" path="res://Scripts/attack.gd" id="10_a6uex"]
 [ext_resource type="Script" path="res://Scripts/LandingState.gd" id="10_e7jjg"]
+[ext_resource type="Script" path="res://Scripts/Damageable.cs" id="11_s8by0"]
 [ext_resource type="Script" path="res://Scripts/Sword.cs" id="12_5odu2"]
+[ext_resource type="PackedScene" uid="uid://3rq8865pnt3" path="res://Scenes/health_changed_manager.tscn" id="13_cobef"]
+[ext_resource type="PackedScene" uid="uid://djc01hx1cys0e" path="res://Scenes/progress_bar.tscn" id="14_f36jg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ry2ya"]
 radius = 8.0
@@ -482,6 +485,17 @@ tree_root = SubResource("AnimationNodeStateMachine_haosr")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Move/blend_position = 0.0247229
 
+[node name="Damageable" type="Node" parent="." node_paths=PackedStringArray("health_bar")]
+script = ExtResource("11_s8by0")
+MaxHealth = 100
+health_bar = NodePath("../TextureProgressBar")
+
+[node name="HealthChangedManager" parent="." instance=ExtResource("13_cobef")]
+offset_left = -16.0
+offset_top = -56.0
+offset_right = 24.0
+offset_bottom = -16.0
+
 [node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "animation_tree", "current_state")]
 script = ExtResource("7_utua3")
 character = NodePath("..")
@@ -522,6 +536,13 @@ script = ExtResource("12_5odu2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sword"]
 position = Vector2(28, -8)
 shape = SubResource("RectangleShape2D_4537w")
+
+[node name="TextureProgressBar" parent="." node_paths=PackedStringArray("damageable") instance=ExtResource("14_f36jg")]
+offset_left = -32.0
+offset_top = -40.0
+offset_right = 32.0
+offset_bottom = 0.0
+damageable = NodePath("../Damageable")
 
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Landing" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Attack" method="_on_animation_tree_animation_finished"]

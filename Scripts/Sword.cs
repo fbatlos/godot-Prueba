@@ -19,6 +19,7 @@ public partial class Sword : Area2D
 	{
 		foreach (Node child in body.GetChildren()) { 
 			if (child is Damageable) {
+				GD.Print(child);
 				((Damageable)child).Hit(damage);
 
 				GD.Print(body.Name + "reccive 10 de daño.");
@@ -28,5 +29,5 @@ public partial class Sword : Area2D
 	
 }
 
-/* hearbar , menu ,daño , endgame y items, marker look
+/* hearbar ,daño , endgame y items
 */

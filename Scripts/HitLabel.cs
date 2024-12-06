@@ -10,14 +10,14 @@ public partial class HitLabel : Label
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		GD.Print(Position);
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		Position += posicionSpawn * (float)delta * speed;
-		GD.Print(Position);
+		//GD.Print(Position);
 		
 		if(Position > new Vector2(0, 15)){
 			QueueFree();
