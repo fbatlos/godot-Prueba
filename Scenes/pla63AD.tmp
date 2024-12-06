@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://dtu75durqwd02"]
+[gd_scene load_steps=59 format=3 uid="uid://dtu75durqwd02"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_flj5s"]
 [ext_resource type="Texture2D" uid="uid://d31g75e3ijbv4" path="res://Art/Legacy-Fantasy - High Forest 2.3/Character/Idle/Idle-Sheet.png" id="1_uohqy"]
@@ -17,7 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://3rq8865pnt3" path="res://Scenes/health_changed_manager.tscn" id="13_cobef"]
 [ext_resource type="PackedScene" uid="uid://djc01hx1cys0e" path="res://Scenes/progress_bar.tscn" id="14_f36jg"]
 [ext_resource type="Script" path="res://Scripts/dead.gd" id="15_uomkr"]
-[ext_resource type="Script" path="res://Scripts/State.gd" id="16_ngef6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ry2ya"]
 radius = 8.0
@@ -603,13 +602,12 @@ tree_root = SubResource("AnimationNodeStateMachine_haosr")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Move/blend_position = 0.0247229
 
-[node name="Damageable" type="Node" parent="." node_paths=PackedStringArray("health_bar", "_HealthChangedManager", "characterStateMachine", "animationPlayer")]
+[node name="Damageable" type="Node" parent="." node_paths=PackedStringArray("health_bar", "characterStateMachine", "_HealthChangedManager")]
 script = ExtResource("11_s8by0")
-MaxHealth = 70
+MaxHealth = 100
 health_bar = NodePath("../TextureProgressBar")
-_HealthChangedManager = NodePath("../HealthChangedManager")
 characterStateMachine = NodePath("../CharacterStateMachine")
-animationPlayer = NodePath("../AnimationPlayer")
+_HealthChangedManager = NodePath("../HealthChangedManager")
 
 [node name="HealthChangedManager" parent="." instance=ExtResource("13_cobef")]
 offset_left = -16.0
@@ -654,9 +652,6 @@ one_shot = true
 
 [node name="dead" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("15_uomkr")
-
-[node name="hit" type="Node" parent="CharacterStateMachine"]
-script = ExtResource("16_ngef6")
 
 [node name="Sword" type="Area2D" parent="."]
 monitoring = false

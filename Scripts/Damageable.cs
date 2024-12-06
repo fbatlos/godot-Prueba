@@ -10,17 +10,20 @@ public partial class Damageable : Node
 	[Export]
 	public health_bar health_bar;
 
-	public const string hit_animation = "hit";
-	public const string dead_animation = "dead";
+	[Export]
+	public HealthChangedManager _HealthChangedManager;
 
 	[Export]
 	public CharacterStateMachine characterStateMachine;
 
+	[Export]
+	public AnimationPlayer animationPlayer;
+	public const string hit_animation = "hit";
+	public const string dead_animation = "dead";
 
 	private int _currentHealth;
 
-	[Export]
-	public HealthChangedManager _HealthChangedManager;
+	
 
 	public bool dead = false;
 
@@ -44,14 +47,12 @@ public partial class Damageable : Node
 	public override void _Ready()
 	{
 		CurrentHealth = MaxHealth;
-		//_HealthChangedManager = GetNode<HealthChangedManager>("../HealthChangedManager");
 
 		if (_HealthChangedManager == null)
 		{
 			GD.Print("No se pudo encontrar el nodo HealthChangedManager.");
 		}
 
-		//_characterStateMachine = GetNode<CharacterStateMachine>("../CharacterStateMachine");
 	}
 
 	public override void _Process(double delta)
@@ -65,7 +66,14 @@ public partial class Damageable : Node
 	public void Hit(int damage)
 	{
 		hit = true;
-		//characterStateMachine.ChangeAnimationState(hit_animation);
+		if(GetParent().Name != "Player"){
+			characterStateMachine.ChangeAnimationState(hit_animation);
+		}
+		else
+		{
+			animationPlayer.Play(hit_animation);
+			GD.Print("hiteó");
+		}
 		CurrentHealth -= damage;
 		_HealthChangedManager?.OnHealthChanged(-damage);
 		
@@ -74,7 +82,14 @@ public partial class Damageable : Node
 
 	private void OnDeath(double delta)
 	{
-		characterStateMachine.ChangeAnimationState(dead_animation);
+
+		if(GetParent().Name != "Player"){
+			characterStateMachine.ChangeAnimationState(dead_animation);
+		}
+		else
+		{
+			animationPlayer.Play(dead_animation);
+		}
 		timerDeath -= delta;
 		if(timerDeath <= 0){
 			if(GetParent().Name != "Player"){
