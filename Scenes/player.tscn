@@ -661,6 +661,7 @@ script = ExtResource("16_ngef6")
 [node name="Sword" type="Area2D" parent="."]
 monitoring = false
 script = ExtResource("12_5odu2")
+damage = 50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sword"]
 position = Vector2(28, -8)

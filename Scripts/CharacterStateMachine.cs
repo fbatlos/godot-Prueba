@@ -28,6 +28,7 @@ public partial class CharacterStateMachine : Node
 		{
 			stateMachinePlayback.Travel(animationState);
 		}
+		//Stop pisa a las animaciones de dead y hit
 	}
 
 	private void OnAnimationFinished(string animName)

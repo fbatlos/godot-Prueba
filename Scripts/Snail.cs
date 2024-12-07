@@ -10,6 +10,8 @@ public partial class Snail : CharacterBody2D
 	private double timerWait = 0.8;
 
 	private bool continue_walk;
+
+	private bool stop;
 	
 	[Export]
 	public NodePath VisionPath;
@@ -45,7 +47,7 @@ public partial class Snail : CharacterBody2D
 			visionNodo = GetNode<VisionEnemy>(VisionPath); 
 			player = visionNodo.player;
 			continue_walk = visionNodo.continue_walk;
-
+			stop = visionNodo.stop;
 			if(continue_walk){
 				//timerWait = 0.8;
 				OnContinue(delta);
@@ -112,7 +114,9 @@ public partial class Snail : CharacterBody2D
 		else
 		{
 			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-			_characterStateMachine.ChangeAnimationState(name_Animation_Stop);
+			if(stop){
+				_characterStateMachine.ChangeAnimationState(name_Animation_Stop);
+			}
 		}
 
 		Velocity = velocity;

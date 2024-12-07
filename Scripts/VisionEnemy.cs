@@ -9,6 +9,8 @@ public partial class VisionEnemy : Area2D
 
 	public bool continue_walk;
 
+	public bool stop = true;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -26,6 +28,8 @@ public partial class VisionEnemy : Area2D
 			player = body;
 			//GD.Print(player.GlobalPosition);
 			continue_walk = true;
+			stop = false;
+
 		}
 	}
 
@@ -34,6 +38,7 @@ public partial class VisionEnemy : Area2D
 			// GD.Print("Player fuera"); 
 			player = null; 
 			continue_walk =false;
+			stop = true;
 		}
 	}
 

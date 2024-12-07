@@ -72,20 +72,26 @@ public partial class Damageable : Node
 		else
 		{
 			animationPlayer.Play(hit_animation);
-			GD.Print("hiteó");
 		}
 		CurrentHealth -= damage;
 		_HealthChangedManager?.OnHealthChanged(-damage);
-		
-		
 	}
 
 	private void OnDeath(double delta)
 	{
 
 		if(GetParent().Name != "Player"){
-			characterStateMachine.ChangeAnimationState(dead_animation);
+		
+			if(GetParent().Name == "Boar"){
+				
+				characterStateMachine.ChangeAnimationState("hit");
+			}
+			else
+			{
+				characterStateMachine.ChangeAnimationState(dead_animation);
+			}
 		}
+
 		else
 		{
 			animationPlayer.Play(dead_animation);
