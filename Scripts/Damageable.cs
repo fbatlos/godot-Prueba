@@ -68,8 +68,9 @@ public partial class Damageable : Node
 	{
 		hit = true;
 		if(GetParent().Name != "Player"){
-			characterStateMachine.ChangeAnimationState(hit_animation);
-			characterStateMachine.ChangeAnimationState("hit");
+			if(GetParent().Name == "Boar"){
+				characterStateMachine.ChangeAnimationState("hit");
+			}	
 		}
 		else
 		{
@@ -93,7 +94,6 @@ public partial class Damageable : Node
 				characterStateMachine.ChangeAnimationState(dead_animation);
 			}
 		}
-
 		else
 		{
 			animationPlayer.Play(dead_animation);
@@ -102,7 +102,9 @@ public partial class Damageable : Node
 		if(timerDeath <= 0){
 			if(GetParent().Name != "Player"){
 				GetParent().QueueFree();
-				GetTree().ChangeSceneToFile("res://Scenes/game_win.tscn");
+				if(GetParent().Name == "Boar"){
+					GetTree().ChangeSceneToFile("res://Scenes/game_win.tscn");
+				}
 				dead = false;
 			}else{
 				GetTree().ChangeSceneToFile("res://Scenes/game_over.tscn");

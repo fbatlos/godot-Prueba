@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://4tetsylb8tah"]
+[gd_scene load_steps=39 format=3 uid="uid://4tetsylb8tah"]
 
 [ext_resource type="Texture2D" uid="uid://l5x15wmsj144" path="res://Art/Legacy-Fantasy - High Forest 2.3/Mob/Snail/walk-Sheet.png" id="1_4pq6f"]
 [ext_resource type="Script" path="res://Scripts/Snail.cs" id="1_yiknx"]
@@ -284,9 +284,6 @@ animation = &"continue_walk"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qwa1t"]
 animation = &"dead"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yly85"]
-animation = &"hit"
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qtoa3"]
 animation = &"stop"
 
@@ -305,19 +302,19 @@ switch_mode = 1
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lcv66"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4ixx5"]
-switch_mode = 1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4yju5"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_57qg1"]
-switch_mode = 1
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iac8m"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mhkbe"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lk68i"]
+switch_mode = 1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xdu32"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nsyip"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5qdyh"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aempd"]
+switch_mode = 1
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4x2x5"]
 states/Start/position = Vector2(171, 83)
@@ -325,13 +322,11 @@ states/continue_walk/node = SubResource("AnimationNodeAnimation_83nch")
 states/continue_walk/position = Vector2(514, 222.049)
 states/dead/node = SubResource("AnimationNodeAnimation_qwa1t")
 states/dead/position = Vector2(743, 100)
-states/hit/node = SubResource("AnimationNodeAnimation_yly85")
-states/hit/position = Vector2(557, 100)
 states/stop/node = SubResource("AnimationNodeAnimation_qtoa3")
 states/stop/position = Vector2(340, 219)
 states/walk/node = SubResource("AnimationNodeAnimation_8ytoh")
 states/walk/position = Vector2(394, 100)
-transitions = ["walk", "stop", SubResource("AnimationNodeStateMachineTransition_6e4nx"), "stop", "continue_walk", SubResource("AnimationNodeStateMachineTransition_eky23"), "continue_walk", "walk", SubResource("AnimationNodeStateMachineTransition_ekqpv"), "Start", "walk", SubResource("AnimationNodeStateMachineTransition_lcv66"), "walk", "hit", SubResource("AnimationNodeStateMachineTransition_4ixx5"), "hit", "walk", SubResource("AnimationNodeStateMachineTransition_4yju5"), "hit", "dead", SubResource("AnimationNodeStateMachineTransition_57qg1"), "dead", "End", SubResource("AnimationNodeStateMachineTransition_iac8m"), "continue_walk", "hit", SubResource("AnimationNodeStateMachineTransition_mhkbe"), "hit", "continue_walk", SubResource("AnimationNodeStateMachineTransition_xdu32")]
+transitions = ["walk", "stop", SubResource("AnimationNodeStateMachineTransition_6e4nx"), "stop", "continue_walk", SubResource("AnimationNodeStateMachineTransition_eky23"), "continue_walk", "walk", SubResource("AnimationNodeStateMachineTransition_ekqpv"), "Start", "walk", SubResource("AnimationNodeStateMachineTransition_lcv66"), "dead", "End", SubResource("AnimationNodeStateMachineTransition_iac8m"), "walk", "dead", SubResource("AnimationNodeStateMachineTransition_lk68i"), "dead", "walk", SubResource("AnimationNodeStateMachineTransition_nsyip"), "continue_walk", "dead", SubResource("AnimationNodeStateMachineTransition_5qdyh"), "dead", "continue_walk", SubResource("AnimationNodeStateMachineTransition_aempd")]
 graph_offset = Vector2(0, 21.3647)
 
 [sub_resource type="CSharpScript" id="CSharpScript_66eeu"]

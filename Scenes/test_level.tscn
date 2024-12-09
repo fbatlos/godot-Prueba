@@ -9645,8 +9645,9 @@ drag_vertical_enabled = true
 
 [node name="Enemies" type="Node" parent="."]
 
-[node name="Snail" parent="Enemies" instance=ExtResource("5_hth6s")]
+[node name="Snail" parent="Enemies" node_paths=PackedStringArray("sound") instance=ExtResource("5_hth6s")]
 position = Vector2(116, 88)
+sound = NodePath("../../AudioStreamPlayer2D")
 
 [node name="Snail3" parent="Enemies" instance=ExtResource("5_hth6s")]
 position = Vector2(864, 87)

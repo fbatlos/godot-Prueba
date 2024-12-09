@@ -27,7 +27,9 @@ public partial class VisionEnemy : Area2D
 	public void playerIsInside(Node2D body){
 		if(body.Name == "Player"){
 			player = body;
-			sound.Play();
+			if(GetParent().Name == "Boar"){
+				sound.Play();
+			}
 			//GD.Print(player.GlobalPosition);
 			continue_walk = true;
 			stop = false;
