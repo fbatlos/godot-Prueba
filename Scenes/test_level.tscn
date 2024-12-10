@@ -9665,3 +9665,11 @@ position = Vector2(2262, 124)
 stream = ExtResource("13_tk8ai")
 volume_db = -9.674
 autoplay = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = -284.0
+offset_top = 19.0
+offset_right = -213.0
+offset_bottom = 68.0
+text = " 𝓪𝓽𝓪𝓬𝓪𝓼 
+𝓬𝓸𝓷 𝓵𝓪 𝓞"
