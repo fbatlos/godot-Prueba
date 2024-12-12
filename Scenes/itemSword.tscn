@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://chr6hgwuciri6"]
+
+[ext_resource type="Texture2D" uid="uid://cnt0dr0lmquje" path="res://Art/sword/Exotic Swords.png" id="1_4nchy"]
+[ext_resource type="Script" path="res://Scripts/ItemSwordArea.cs" id="2_ak15g"]
+[ext_resource type="Script" path="res://Scripts/ItemFloating.cs" id="3_8q48h"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_88mjj"]
+radius = 3.4569
+height = 24.0709
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6t6fu"]
+atlas = ExtResource("1_4nchy")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16b4u"]
+atlas = ExtResource("1_4nchy")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vc1j6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6t6fu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_16b4u")
+}],
+"loop": true,
+"name": &"item",
+"speed": 5.0
+}]
+
+[node name="itemSword" type="Node2D"]
+
+[node name="itemSwordArea" type="Area2D" parent="."]
+script = ExtResource("2_ak15g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="itemSwordArea"]
+position = Vector2(0, -1)
+rotation = 0.694641
+shape = SubResource("CapsuleShape2D_88mjj")
+
+[node name="itemFloating" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 0.01)
+scale = Vector2(1.0625, 0.96875)
+sprite_frames = SubResource("SpriteFrames_vc1j6")
+animation = &"item"
+autoplay = "item"
+script = ExtResource("3_8q48h")
+
+[connection signal="body_entered" from="itemSwordArea" to="itemSwordArea" method="_on_Player_Get"]

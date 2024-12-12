@@ -406,7 +406,6 @@ texture_filter = 1
 position = Vector2(17, -14)
 texture = ExtResource("5_8il77")
 hframes = 8
-frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -414,8 +413,8 @@ libraries = {
 }
 
 [node name="ProgressBar" parent="." node_paths=PackedStringArray("damageable") instance=ExtResource("8_321nv")]
-offset_left = -15.0
-offset_top = -37.0
+offset_left = -19.0
+offset_top = -42.0
 offset_right = 49.0
 offset_bottom = 3.0
 damageable = NodePath("../Damageable")

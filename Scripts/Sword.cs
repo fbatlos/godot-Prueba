@@ -7,6 +7,7 @@ public partial class Sword : Area2D
 {
 
 	[Export] public int damage = 10;
+	[Export] public Sprite2D itemSwordVisible;
 	
 
 	public override void _Ready()

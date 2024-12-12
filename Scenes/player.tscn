@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://dtu75durqwd02"]
+[gd_scene load_steps=62 format=3 uid="uid://dtu75durqwd02"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_flj5s"]
 [ext_resource type="Texture2D" uid="uid://d31g75e3ijbv4" path="res://Art/Legacy-Fantasy - High Forest 2.3/Character/Idle/Idle-Sheet.png" id="1_uohqy"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://Scripts/dead.gd" id="15_uomkr"]
 [ext_resource type="AudioStream" uid="uid://0sylspmkjvr4" path="res://Art/sounds/sword-swing-whoosh-sound-effect-1-241824.mp3" id="15_v4k26"]
 [ext_resource type="Script" path="res://Scripts/State.gd" id="16_ngef6"]
+[ext_resource type="Texture2D" uid="uid://c15k04r1afbxw" path="res://Art/sword/swordItemGet.png" id="20_tudpt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ry2ya"]
 radius = 8.0
@@ -663,9 +664,10 @@ script = ExtResource("15_uomkr")
 [node name="hit" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("16_ngef6")
 
-[node name="Sword" type="Area2D" parent="."]
+[node name="Sword" type="Area2D" parent="." node_paths=PackedStringArray("itemSwordVisible")]
 monitoring = false
 script = ExtResource("12_5odu2")
+itemSwordVisible = NodePath("../itemSwordVisible")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sword"]
 position = Vector2(28, -8)
@@ -677,6 +679,11 @@ offset_top = -40.0
 offset_right = 32.0
 offset_bottom = 0.0
 damageable = NodePath("../Damageable")
+
+[node name="itemSwordVisible" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -46)
+texture = ExtResource("20_tudpt")
 
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Landing" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Attack" method="_on_animation_tree_animation_finished"]

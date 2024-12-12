@@ -9,7 +9,8 @@ public partial class PauseMenu : Control
 	public void Resume()
 	{
 		GetTree().Paused = false;
-		animation.PlayBackwards("blur");
+		animation.Play("RESET");
+		//animation.PlayBackwards("blur");
 	}
 
 	public void Pause()
