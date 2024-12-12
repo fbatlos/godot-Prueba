@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://dmmkegp00cl18"]
+[gd_scene load_steps=29 format=4 uid="uid://dmmkegp00cl18"]
 
 [ext_resource type="Texture2D" uid="uid://bxpx8tjblgveb" path="res://Art/Legacy-Fantasy - High Forest 2.3/Assets/Tiles.png" id="1_eqpw1"]
 [ext_resource type="Texture2D" uid="uid://djjk8rhfsao1a" path="res://Art/Legacy-Fantasy - High Forest 2.3/Background/Background.png" id="1_uo41u"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cqhjbikcdywa" path="res://Art/Legacy-Fantasy - High Forest 2.3/Assets/Tree-Assets.png" id="9_sgwyd"]
 [ext_resource type="PackedScene" uid="uid://ir2uv3vfup0x" path="res://Scenes/boar.tscn" id="12_81vnf"]
 [ext_resource type="AudioStream" uid="uid://dmyvatpkxy2tj" path="res://Art/sounds/Pokemon_Center_Super_Lofi_64_Remix_[_YouConvert.net_].mp3" id="13_tk8ai"]
+[ext_resource type="PackedScene" uid="uid://cyloayjlklap8" path="res://Scenes/pause_menu.tscn" id="14_2wec7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vivlw"]
 texture = ExtResource("2_7oko3")
@@ -9673,3 +9674,7 @@ offset_right = -213.0
 offset_bottom = 68.0
 text = " 𝓪𝓽𝓪𝓬𝓪𝓼 
 𝓬𝓸𝓷 𝓵𝓪 𝓞"
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer2" instance=ExtResource("14_2wec7")]
