@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://i5fgnjytqwjl"]
+[gd_scene load_steps=6 format=3 uid="uid://i5fgnjytqwjl"]
 
 [ext_resource type="Script" path="res://Scripts/Menu.cs" id="1_h5a3v"]
 [ext_resource type="Texture2D" uid="uid://cvb46l83xnamu" path="res://Art/fondo-win/FondoWin.jpg" id="2_v3oor"]
 [ext_resource type="AudioStream" uid="uid://dk2plef712cek" path="res://Art/sounds/level-win-6416.mp3" id="3_b13nv"]
+[ext_resource type="Script" path="res://Scripts/button_guardar.gd" id="4_a732h"]
+[ext_resource type="Script" path="res://Scenes/points.gd" id="4_droi6"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -11,8 +13,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 157.0
 offset_top = 34.0
-offset_right = 57.7549
-offset_bottom = -33.425
+offset_right = 58.0
+offset_bottom = 9.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.35, 0.35)
@@ -52,6 +54,22 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 86
 text = "𝕮𝖔𝖓𝖌𝖗𝖆𝖙𝖚𝖑𝖆𝖙𝖎𝖔𝖓"
 
+[node name="Points" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 91
+text = "Points :           "
+script = ExtResource("4_droi6")
+
+[node name="Button_Guardar" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 96
+text = "Cargar Puntuaciones
+"
+script = ExtResource("4_a732h")
+
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_b13nv")
 autoplay = true
+
+[connection signal="pressed" from="VBoxContainer2/Button_Guardar" to="VBoxContainer2/Button_Guardar" method="_on_pressed"]

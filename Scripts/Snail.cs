@@ -36,6 +36,7 @@ public partial class Snail : CharacterBody2D
 	private Vector2 direction;
 
 	public Damageable _isDead;
+	
 
 	public override void _Ready()
 	{

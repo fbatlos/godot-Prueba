@@ -86,16 +86,21 @@ public partial class Damageable : Node
 		if(GetParent().Name != "Player"){
 		
 			if(GetParent().Name == "Boar"){
-				
+				var global = GetNode("/root/Global");
+				global.Call("add_score", 1000);
 				characterStateMachine.ChangeAnimationState("hit");
 			}
 			else
 			{
+				var global = GetNode("/root/Global");
+				global.Call("add_score", 100);
 				characterStateMachine.ChangeAnimationState(dead_animation);
 			}
 		}
 		else
 		{
+			var global = GetNode("/root/Global");
+			global.Set("score", 0);
 			animationPlayer.Play(dead_animation);
 		}
 		timerDeath -= delta;

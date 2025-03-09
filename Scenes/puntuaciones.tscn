@@ -1,0 +1,144 @@
+[gd_scene load_steps=6 format=3 uid="uid://ddqaorfj6el0c"]
+
+[ext_resource type="Script" path="res://Scripts/apicCarga.cs" id="1_j4fju"]
+[ext_resource type="Script" path="res://Scenes/points.gd" id="2_8gnre"]
+[ext_resource type="Script" path="res://Scripts/guardarMisPuntos.cs" id="2_cv61f"]
+[ext_resource type="Script" path="res://Scenes/VBoxContainerMis.cs" id="2_h3as2"]
+[ext_resource type="Script" path="res://Scripts/add_puntos.gd" id="4_hiaq3"]
+
+[node name="Puntuaciones" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -68.0
+offset_right = -28.0
+offset_bottom = -68.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j4fju")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 570.0
+offset_top = 321.0
+offset_right = 1062.0
+offset_bottom = 583.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 323)
+anchor_mode = 0
+
+[node name="VBoxContainerAll" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+offset_left = 599.0
+offset_top = 382.0
+offset_right = 799.0
+offset_bottom = 507.0
+size_flags_horizontal = 3
+
+[node name="VBoxContainerMis" type="VBoxContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+offset_left = 841.0
+offset_top = 379.0
+offset_right = 1041.0
+offset_bottom = 504.0
+size_flags_horizontal = 3
+script = ExtResource("2_h3as2")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="VBoxContainerMis"]
+
+[node name="ControlApi" type="Control" parent="."]
+anchors_preset = 0
+offset_left = -1.0
+offset_right = 39.0
+offset_bottom = 40.0
+
+[node name="Mios" type="Label" parent="."]
+visible = false
+offset_left = 838.0
+offset_top = 338.0
+offset_right = 1027.0
+offset_bottom = 368.0
+theme_override_colors/font_color = Color(0, 0.701961, 0, 1)
+text = "Tus puntuaciones "
+
+[node name="Puntos" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.06
+anchor_bottom = 0.035
+offset_left = 895.0
+offset_top = 525.0
+offset_right = 951.88
+offset_bottom = 539.32
+theme_override_colors/font_color = Color(0, 0.768627, 0, 1)
+script = ExtResource("2_8gnre")
+
+[node name="General" type="Label" parent="."]
+layout_mode = 0
+offset_left = 599.0
+offset_top = 338.0
+offset_right = 788.0
+offset_bottom = 381.0
+theme_override_colors/font_color = Color(0, 0.701961, 0, 1)
+text = "Puntuaciones generales "
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 725.0
+offset_top = 529.0
+offset_right = 887.0
+offset_bottom = 560.0
+text = "Guargar mis puntos"
+script = ExtResource("2_cv61f")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="addPuntos" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 28.0
+offset_top = 68.0
+offset_right = 68.0
+offset_bottom = 108.0
+script = ExtResource("4_hiaq3")
+
+[node name="ColorRect" type="ColorRect" parent="addPuntos"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.065
+anchor_bottom = 0.062
+offset_left = 670.0
+offset_top = 332.0
+offset_right = 873.4
+offset_bottom = 425.52
+color = Color(0.572988, 0.572988, 0.572988, 1)
+
+[node name="LineEdit" type="LineEdit" parent="addPuntos/ColorRect"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 23.0
+offset_right = 148.0
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 11
+placeholder_text = "Ingresa nombre"
+
+[node name="guardar" type="Button" parent="addPuntos/ColorRect"]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 63.0
+offset_right = 134.0
+offset_bottom = 85.0
+theme_override_font_sizes/font_size = 10
+text = "Guardar"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="addPuntos"]
+
+[connection signal="pressed" from="Button" to="Button" method="_add_Puntos"]
+[connection signal="pressed" from="addPuntos/ColorRect/guardar" to="addPuntos" method="_on_button_pressed"]

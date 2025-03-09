@@ -17,6 +17,8 @@ public partial class KillZone : Area2D
 	public void _OnBodyEnter(Node2D body){
 		GD.Print(body.Name);
 		if (body.Name == "Player"){
+			var global = GetNode("/root/Global");
+			global.Set("score", 0);
 			GetTree().ChangeSceneToFile("res://Scenes/game_over.tscn");
 		}
 		else

@@ -1,16 +1,13 @@
 using Godot;
 using System;
 
-
-
-public partial class Menu : Control
+public partial class guardarMisPuntos : Button
 {
-	[Export]
-	Node Api;
-
+	private Control _addPuntos;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		_addPuntos = GetNode<Control>("../addPuntos");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,11 +15,8 @@ public partial class Menu : Control
 	{
 	}
 	
-	public void startGame(){
-		GetTree().ChangeSceneToFile("res://Scenes/test_level.tscn");
-	}
-	
-	public void outGame(){
-		GetTree().Quit();
+	public void _add_Puntos()
+	{
+		_addPuntos.Visible = true;
 	}
 }
